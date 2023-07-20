@@ -2,6 +2,8 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import "./Entete.css";
 import { Dropdown, Spinner } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import Home from "./../Main/Home";
 
 const Entete = () => {
   return (
@@ -27,49 +29,42 @@ const Entete = () => {
       />
 
       <div style={{ display: "flex", flexDirection: "row" }}>
-        <Dropdown
-          style={{
-            marginTop: "25px",
-            width: "140px",
-            height: "32px",
-          }}
-        >
-          <Dropdown.Toggle
+        <Link to={"/Home"}>
+          <Button
             style={{
-              width: "140px",
+              marginTop: "25px",
+
+              width: "130px",
               height: "32px",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              marginRight: "25px",
+              marginLeft: "25px",
             }}
             variant="outline-danger"
-            id="dropdown-basic"
           >
-            Langue
-          </Dropdown.Toggle>
+            Home
+          </Button>{" "}
+        </Link>
+        <Link to={"/Movies"}>
+          <Button
+            style={{
+              marginTop: "25px",
 
-          <Dropdown.Menu>
-            <Dropdown.Item href="#/action-1">Français</Dropdown.Item>
-            <Dropdown.Item href="#/action-2">Anglais</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Arabe</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
-        <Button
-          style={{
-            marginTop: "25px",
-
-            width: "130px",
-            height: "32px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            marginRight: "25px",
-            marginLeft: "25px",
-          }}
-          variant="outline-danger"
-        >
-          Abonnez-vous
-        </Button>{" "}
+              width: "130px",
+              height: "32px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginRight: "25px",
+              marginLeft: "25px",
+            }}
+            variant="outline-danger"
+          >
+            Movies
+          </Button>
+        </Link>
         <Button
           style={{
             marginTop: "25px",
@@ -82,7 +77,7 @@ const Entete = () => {
           }}
           variant="outline-danger"
         >
-          S'identifier
+          TV Series
         </Button>{" "}
         <Spinner
           animation="grow"

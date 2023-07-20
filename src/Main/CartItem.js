@@ -2,13 +2,14 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Starrating from "./Starrating";
+import { Link } from "react-router-dom";
 
 const CartItem = ({ el, del }) => {
   return (
     <div>
       <Card
         style={{
-          width: "250px",
+          width: "300px",
           height: "470px",
           color: "white",
           borderColor: "#DC3545",
@@ -33,14 +34,16 @@ const CartItem = ({ el, del }) => {
           >
             Delete
           </Button>
-          <Button
-            style={{
-              marginRight: "10px",
-            }}
-            variant="outline-danger"
-          >
-            see
-          </Button>
+          <Link to={`/tab/${el.id}`}>
+            <Button
+              style={{
+                marginRight: "10px",
+              }}
+              variant="outline-danger"
+            >
+              Watch Now
+            </Button>
+          </Link>
         </Card.Body>
       </Card>
     </div>

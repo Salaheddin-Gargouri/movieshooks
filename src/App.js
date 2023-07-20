@@ -1,11 +1,15 @@
 import "./App.css";
+
 import Entete from "./Entet/Entete";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Main1 from "./Main/Main1";
 import CartList from "./Main/CartList";
-import { useState } from "react";
+import React, { useState } from "react";
 import AAddmovies from "./Main/AAddmovies";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./Main/Home";
+import Information from "./Main/Information cards";
 
 const tab = () => [
   {
@@ -16,6 +20,8 @@ const tab = () => [
     texte:
       "Ayant échappé de peu à la mort, l'intrépide mercenaire Tyler Rake revient pour une nouvelle mission périlleuse : extraire de prison la famille d'un impitoyable gangster.",
     rating: 5,
+
+    videoURL: "https://www.youtube.com/embed/Lc2mwVUuGn8",
   },
   {
     id: Math.random(),
@@ -25,6 +31,7 @@ const tab = () => [
     texte:
       "Dans un nouveau monde post-apocalyptique, une jeune femme et ses amis rebelles tentent d'empêcher la cité mobile de Londres de tout engloutir sur son passage.",
     rating: 3,
+    videoURL: "https://www.youtube.com/embed/IRsFc2gguEg",
   },
   {
     id: Math.random(),
@@ -34,6 +41,7 @@ const tab = () => [
     texte:
       "Une tueuse à gages formée par l'armée sort de sa clandestinité pour protéger sa fille, qu'elle n'a jamais connue, contre des criminels impitoyables réclamant vengeance.",
     rating: 4,
+    videoURL: "https://www.youtube.com/embed/8BFdFeOS3oM",
   },
   {
     id: Math.random(),
@@ -43,6 +51,7 @@ const tab = () => [
     texte:
       "Trois frères se retrouvent au cœur du conflit acharné qui embrase la cité Athena après la mort tragique de leur benjamin.",
     rating: 2,
+    videoURL: "https://www.youtube.com/embed/I4Fr6xokozw",
   },
   {
     id: Math.random(),
@@ -52,6 +61,7 @@ const tab = () => [
     texte:
       "Cible d'un complot l'accusant d'un meurtre qu'il n'a pas commis, un sniper des forces spéciales fait appel à son père, tireur d'élite réputé, pour trouver le vrai tueur.",
     rating: 4,
+    videoURL: "https://www.youtube.com/embed/Ub9EikTkrTk",
   },
   {
     id: Math.random(),
@@ -61,6 +71,7 @@ const tab = () => [
     texte:
       "Un agent du FBI est forcé de faire équipe avec le voleur d'art le plus recherché de la planète pour coincer une insaisissable criminelle qui a toujours un coup d'avance.",
     rating: 5,
+    videoURL: "https://www.youtube.com/embed/Pj0wz7zu3Ms",
   },
   {
     id: Math.random(),
@@ -70,6 +81,7 @@ const tab = () => [
     texte:
       "Après un accident d'avion, un homme échoue sur une île déserte. Pendant des années, il lutte pour survivre, porté par l'espoir de rentrer un jour chez lui.",
     rating: 3,
+    videoURL: "https://www.youtube.com/embed/pgOYHJbaV2c",
   },
 ];
 
@@ -90,27 +102,42 @@ function App() {
     setRatefil(x);
   };
   return (
-    <div className="App" style={{ backgroundColor: "#0e0905" }}>
-      <Entete />
+    <BrowserRouter>
+      <div className="App" style={{ backgroundColor: "#0e0905" }}>
+        <Entete />
+        <Routes>
+          <Route path="/Home" element={<Home />} />
 
-      <Main1
-        fil={handelsearch}
-        search={search}
-        handelreting={handelreting}
-        ratefil={ratefil}
-      />
-      <AAddmovies add={handelAdd} />
-      <CartList
-        movies={movies.filter(
-          (el) =>
-            el.title
-              .trim()
-              .toLowerCase()
-              .includes(search.trim().toLowerCase()) && el.rating >= ratefil
-        )}
-        del={handelDelet}
-      />
-    </div>
+          <Route
+            path="/Movies"
+            element={
+              <div>
+                <Main1
+                  fil={handelsearch}
+                  search={search}
+                  handelreting={handelreting}
+                  ratefil={ratefil}
+                />
+                <AAddmovies add={handelAdd} />
+                <CartList
+                  movies={movies.filter(
+                    (el) =>
+                      el.title
+                        .trim()
+                        .toLowerCase()
+                        .includes(search.trim().toLowerCase()) &&
+                      el.rating >= ratefil
+                  )}
+                  del={handelDelet}
+                />
+              </div>
+            }
+          />
+
+          <Route path={"/tab/:id"} element={<Information movies={movies} />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
